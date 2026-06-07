@@ -140,7 +140,7 @@
     <div class="asistencia-whatsapp">
         <img data-aos="fade-down" src="./img-editable/icono4.png" alt="">
          <h2 data-aos="fade-up" id="whatsapp-title"></h2>
-        <p data-aos="fade-up" id="whatsapp-sub2"></p>
+        <p data-aosM="fade-up" id="whatsapp-sub2"></p>
         <br>
         <a data-aos="fade-up" target="_blank" class="boton" id="btn-wh" href="#">CONFIRMAR</a>
         
@@ -207,83 +207,53 @@
     <script src="./form.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init();
+       AOS.init();
+
+        // Helper para asignar sin romper si el elemento no existe
+        const setText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
+        const setHTML = (id, value) => { const el = document.getElementById(id); if (el) el.innerHTML = value; };
+        const setHref = (id, value) => { const el = document.getElementById(id); if (el) el.href = value; };
+        const setAttr = (id, attr, value) => { const el = document.getElementById(id); if (el) el[attr] = value; };
 
         document.addEventListener("DOMContentLoaded", function () {
 
-    
-            // Título de pestaña
             document.title = CONFIG.tituloTab;
 
-            // Textos
-            document.getElementById("texto-ubicacion").textContent = CONFIG.textoUbicacion;
-            document.getElementById("texto-mensaje").textContent = CONFIG.textoMensaje;
-            document.getElementById("whatsapp-title").textContent = CONFIG.textoWhatsappT;
-            document.getElementById("whatsapp-sub2").textContent = CONFIG.textoWhatsappP;
-            document.getElementById("form-title").textContent = CONFIG.textoForm;
-            document.getElementById("form-sub").innerHTML = CONFIG.textoFormSub;
-            document.getElementById("nombre-end").textContent = CONFIG.nombreFestejado;
-            document.getElementById("subtitulo-end").textContent = CONFIG.subtitulo;
-            document.getElementById("textarea-mensaje").placeholder = "Dejale un mensaje a " + CONFIG.nombreFestejado;
+            setText("texto-ubicacion", CONFIG.textoUbicacion);
+            setText("texto-mensaje", CONFIG.textoMensaje);
+            setText("whatsapp-title", CONFIG.textoWhatsappT);
+            setText("whatsapp-sub2", CONFIG.textoWhatsappP);
+            setText("form-title", CONFIG.textoForm);
+            setHTML("form-sub", CONFIG.textoFormSub);
+            setText("nombre-end", CONFIG.nombreFestejado);
+            setText("subtitulo-end", CONFIG.subtitulo);
+            setAttr("textarea-mensaje", "placeholder", "Dejale un mensaje a " + CONFIG.nombreFestejado);
 
-            // Links
-            document.getElementById("btn-wh").href = CONFIG.linkWhatsapp;
+            setHref("btn-mapa", CONFIG.linkMapa);
+            setHref("btn-wh", CONFIG.linkWhatsapp);
 
-            document.getElementById("btn-mapa").href = CONFIG.linkMapa;
             const btnAgendar = document.getElementById("btn-agendar");
-            if (CONFIG.linkAgendar) {
-                btnAgendar.href = CONFIG.linkAgendar;
-            } else {
-                btnAgendar.style.display = "none";
+            if (btnAgendar) {
+                if (CONFIG.linkAgendar) {
+                    btnAgendar.href = CONFIG.linkAgendar;
+                } else {
+                    btnAgendar.style.display = "none";
+                }
             }
 
-            // Opciones del select de invitados
             const select = document.getElementById("select-invitados");
-            for (let i = 1; i <= CONFIG.maxInvitados; i++) {
-                const opt = document.createElement("option");
-                opt.value = i;
-                opt.textContent = i + (i === 1 ? " persona" : " personas");
-                select.appendChild(opt);
+            if (select) {
+                for (let i = 1; i <= CONFIG.maxInvitados; i++) {
+                    const opt = document.createElement("option");
+                    opt.value = i;
+                    opt.textContent = i + (i === 1 ? " persona" : " personas");
+                    select.appendChild(opt);
+                }
             }
-            // Action btn de wh
-            
-            // Action del form
-            document.forms["asistenciaform"].action = CONFIG.scriptFormUrl;
+
+            const form = document.forms["asistenciaform"];
+            if (form) form.action = CONFIG.scriptFormUrl;
         });
-    </script>
-
-    <script>
-
-    function copyToClipboard(text) {
-       const tempInput = document.createElement("input");
-       document.body.appendChild(tempInput);
-       tempInput.value = text;
-       tempInput.select();
-       document.execCommand("copy");
-       document.body.removeChild(tempInput);
-       alert(`Copiaste los datos de cuenta "${text}" a tu portapapeles`);
-     }
-   </script>
-
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const headers = document.querySelectorAll(".accordion-header");
-
-    headers.forEach((header) => {
-      header.addEventListener("click", function () {
-        const item = this.parentElement;
-        item.classList.toggle("active");
-
-        // Cierra otros ítems si querés que solo se abra uno a la vez:
-        headers.forEach((otherHeader) => {
-          const otherItem = otherHeader.parentElement;
-          if (otherItem !== item) {
-            otherItem.classList.remove("active");
-          }
-        });
-      });
-    });
-  });
 </script>
 </body>
 </html>
