@@ -687,8 +687,12 @@ footer p {
         height: 80VH;
     }
     .fotos .fotos-nino {
-        width: auto;
-        max-height: 92%;
+        padding: 0;
+        margin: auto;
+        width: 96%;
+        height: auto;
+        
+        
        
     }
     .fotos img {
