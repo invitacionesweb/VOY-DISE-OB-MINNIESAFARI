@@ -314,7 +314,9 @@ audio::-webkit-media-controls-current-time-display {
 }
 .accordion-item {
     border: 1px solid var(--color-2);
-        width: 80vw;
+    padding: auto;
+    margin: auto;
+    width: 80vw;
     margin: 4PX auto;
     height: auto;
     color: var(--color-2);
@@ -360,6 +362,7 @@ audio::-webkit-media-controls-current-time-display {
 .accordion-content {
     max-height: 0;
     max-width: 700px;
+    margin: auto;
     height: auto;
     overflow: hidden;
     padding: 0 15px;
