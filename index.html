@@ -207,6 +207,38 @@
     <script src="./form.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+    function copyToClipboard(text) {
+       const tempInput = document.createElement("input");
+       document.body.appendChild(tempInput);
+       tempInput.value = text;
+       tempInput.select();
+       document.execCommand("copy");
+       document.body.removeChild(tempInput);
+       alert(`Copiaste el alias "${text}" a tu portapapeles`);
+    }
+    </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const headers = document.querySelectorAll(".accordion-header");
+        headers.forEach((header) => {
+            header.addEventListener("click", function () {
+                const item = this.parentElement;
+                item.classList.toggle("active");
+                headers.forEach((otherHeader) => {
+                    const otherItem = otherHeader.parentElement;
+                    if (otherItem !== item) {
+                        otherItem.classList.remove("active");
+                    }
+                });
+            });
+        });
+    });
+    </script>
+
+</body>
+    <script>
+        
        AOS.init();
 
         // Helper para asignar sin romper si el elemento no existe
